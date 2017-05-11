@@ -164,6 +164,17 @@ pub enum PropertyValue {
     StringValue(String),
 }
 
+impl fmt::Display for PropertyValue {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> Result<(), fmt::Error> {
+        match *self {
+            PropertyValue::BoolValue(ref v) => write!(fmt, "{}", v),
+            PropertyValue::FloatValue(ref v) => write!(fmt, "{}", v),
+            PropertyValue::IntValue(ref v) => write!(fmt, "{}", v),
+            PropertyValue::StringValue(ref v) => write!(fmt, "{}", v),
+        }
+    }
+}
+
 impl PropertyValue {
     fn new(property_type: String, value: String) -> Result<PropertyValue, TiledError> {
         use std::error::Error;
